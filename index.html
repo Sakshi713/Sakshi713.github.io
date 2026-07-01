@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name — Personal Site</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAF7F0;
+    --paper-dim: #F1ECE1;
+    --ink: #1C1B18;
+    --ink-soft: #55524A;
+    --line: #D9D2C1;
+    --green: #2F6F4E;
+    --green-dim: #E4EEE7;
+    --clay: #C1622D;
+    --clay-dim: #F6E4D8;
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  nav .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+  }
+  .nav-brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .nav-brand span { color: var(--green); }
+  .nav-links { display: flex; gap: 22px; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    transition: color .15s ease;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* ---------- HERO ---------- */
+  header.hero {
+    padding: 84px 0 60px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--green);
+    letter-spacing: 0.04em;
+    margin-bottom: 18px;
+    display: block;
+  }
+  h1.name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 14px;
+  }
+  .tagline {
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin-bottom: 34px;
+  }
+
+  /* terminal block — signature element */
+  .terminal {
+    background: #1C1B18;
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88rem;
+    color: #EDE9DD;
+    max-width: 560px;
+    box-shadow: 0 6px 0 var(--line);
+  }
+  .terminal .bar { display: flex; gap: 6px; margin-bottom: 14px; }
+  .terminal .dot { width: 9px; height: 9px; border-radius: 50%; }
+  .dot.r { background: #E5726A; }
+  .dot.y { background: #E3B34C; }
+  .dot.g { background: #6FBE8C; }
+  .terminal .line { white-space: pre; }
+  .terminal .prompt { color: #6FBE8C; }
+  .terminal .cursor {
+    display: inline-block;
+    width: 7px; height: 1.1em;
+    background: #EDE9DD;
+    vertical-align: text-bottom;
+    animation: blink 1s steps(1) infinite;
+    margin-left: 2px;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .cursor { animation: none; }
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .section-head .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--clay);
+    background: var(--clay-dim);
+    padding: 3px 8px;
+    border-radius: 5px;
+  }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.6rem;
+  }
+
+  p.lede { color: var(--ink-soft); max-width: 62ch; margin-bottom: 8px; }
+
+  /* about / commit log */
+  .log-entry {
+    display: grid;
+    grid-template-columns: 92px 1fr;
+    gap: 18px;
+    padding: 14px 0;
+    border-top: 1px solid var(--line);
+  }
+  .log-entry:first-of-type { border-top: none; margin-top: 20px; }
+  .log-hash {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--green);
+    font-size: 0.85rem;
+    padding-top: 2px;
+  }
+  .log-msg strong { display: block; margin-bottom: 2px; }
+  .log-msg span { color: var(--ink-soft); font-size: 0.92rem; }
+
+  /* projects */
+  .projects { display: grid; gap: 16px; }
+  .project-card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    background: var(--paper-dim);
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .project-card:hover { border-color: var(--green); transform: translateY(-2px); }
+  .project-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .project-title { font-weight: 600; font-size: 1.05rem; }
+  .project-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--green);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .project-desc { color: var(--ink-soft); font-size: 0.94rem; margin-bottom: 12px; }
+  .stack { display: flex; flex-wrap: wrap; gap: 6px; }
+  .stack span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    background: var(--green-dim);
+    color: var(--green);
+    padding: 3px 8px;
+    border-radius: 5px;
+  }
+
+  /* skills */
+  .skills { display: flex; flex-wrap: wrap; gap: 10px; }
+  .skills span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    border: 1px solid var(--line);
+    padding: 6px 12px;
+    border-radius: 999px;
+    color: var(--ink-soft);
+  }
+
+  /* contact */
+  .contact-links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 6px; }
+  .contact-links a {
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    padding: 9px 16px;
+    border-radius: var(--radius);
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: background .15s ease, color .15s ease;
+  }
+  .contact-links a:hover { background: var(--ink); color: var(--paper); }
+
+  footer {
+    text-align: center;
+    padding: 28px 0 50px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 560px) {
+    .log-entry { grid-template-columns: 1fr; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-brand">~/<span>your-name</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">// personal site</span>
+    <h1 class="name">Your Name</h1>
+    <p class="tagline">Student & beginner developer, learning to build things and share them with the world — one commit at a time.</p>
+
+    <div class="terminal">
+      <div class="bar">
+        <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+      </div>
+      <div class="line"><span class="prompt">$</span> git commit -m "started learning to code"</div>
+      <div class="line"><span class="prompt">$</span> git push origin main<span class="cursor"></span></div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>About</h2>
+      <span class="tag">git log</span>
+    </div>
+    <p class="lede">A short log of how I got here. Replace this with your real story — what you're studying, what got you interested in tech, and what you're working on now.</p>
+
+    <div class="log-entry">
+      <div class="log-hash">a1b2c3d</div>
+      <div class="log-msg"><strong>Started learning HTML & CSS</strong><span>Built my first web pages and got hooked on making things people can see in a browser.</span></div>
+    </div>
+    <div class="log-entry">
+      <div class="log-hash">e4f5a6b</div>
+      <div class="log-msg"><strong>Picked up Git & GitHub</strong><span>Learned version control so I could track changes and collaborate without fear of losing work.</span></div>
+    </div>
+    <div class="log-entry">
+      <div class="log-hash">c7d8e9f</div>
+      <div class="log-msg"><strong>Shipped this website</strong><span>Hosted my first project live on GitHub Pages — you're looking at it right now.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Skills</h2>
+      <span class="tag">stack</span>
+    </div>
+    <div class="skills">
+      <span>HTML</span>
+      <span>CSS</span>
+      <span>JavaScript</span>
+      <span>Git</span>
+      <span>GitHub</span>
+      <span>Python</span>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Projects</h2>
+      <span class="tag">repos</span>
+    </div>
+
+    <div class="projects">
+      <div class="project-card">
+        <div class="project-top">
+          <div class="project-title">Project One</div>
+          <a class="project-link" href="#">view repo →</a>
+        </div>
+        <div class="project-desc">A one or two line description of what this project does and why you built it.</div>
+        <div class="stack"><span>HTML</span><span>CSS</span></div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-top">
+          <div class="project-title">Project Two</div>
+          <a class="project-link" href="#">view repo →</a>
+        </div>
+        <div class="project-desc">A one or two line description of what this project does and why you built it.</div>
+        <div class="stack"><span>JavaScript</span><span>Python</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Contact</h2>
+      <span class="tag">reach out</span>
+    </div>
+    <p class="lede">Feel free to get in touch or check out what I'm building.</p>
+    <div class="contact-links">
+      <a href="mailto:you@example.com">Email</a>
+      <a href="https://github.com/your-username" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/your-username" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  built with html &amp; css · hosted on github pages
+</footer>
+
+</body>
+</html>
